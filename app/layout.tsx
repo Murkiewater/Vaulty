@@ -7,7 +7,6 @@ import { ModelProvider } from "@/providers/model-provider";
 import { ToasterProvider } from "@/providers/toast-provider";
 
 import "./globals.css";
-import prismadb from "@/lib/prisma.db";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
