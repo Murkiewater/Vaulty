@@ -63,6 +63,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
         resolver: zodResolver(formSchema),
         defaultValues: initialData ? {
             ...initialData,
+            images: initialData.images || [],
             price: parseFloat(String(initialData?.price)),
         } : {
             name: '',
@@ -146,11 +147,11 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                                         value={field.value.map((image) => image.url)}
                                         disabled={loading}
                                         onChange={(url) => {
-                                            console.log("before:", form.getValues("images"));
-                                            const updated = [...form.getValues("images"), { url }];
-                                            field.onChange(updated);
+                                            field.onChange([...field.value, { url }]);
                                         }}
-                                        onRemove={(url) => field.onChange([...field.value.filter((current) => current.url !== url)])}
+                                        onRemove={(url) => {
+                                            field.onChange(field.value.filter((current) => current.url !== url));
+                                        }}
                                     />
                                 </FormControl>
                                 <FormMessage />

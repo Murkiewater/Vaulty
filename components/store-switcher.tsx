@@ -59,9 +59,9 @@ export default function StoreSwitcher({
             <PopoverContent className="w-[200px] p-0">
                 <Command>
                     <CommandList>
-                        <CommandInput placeholder="Search Campaign..." />
-                        <CommandEmpty>No campaign found</CommandEmpty>
-                        <CommandGroup heading="Campaigns">
+                        <CommandInput placeholder="Search Store..." />
+                        <CommandEmpty>No store found</CommandEmpty>
+                        <CommandGroup heading="Stores">
                             {formattedItems.map((store) => (
                                 <CommandItem
                                 key={store.value}
@@ -90,7 +90,7 @@ export default function StoreSwitcher({
                                 storeModel.onOpen();
                             }}>
                                 <PlusCircle className="mr-2 h-5 w-5"/>
-                                New Campaign
+                                New Store
                             </CommandItem>
                         </CommandGroup>
                     </CommandList>

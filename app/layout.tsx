@@ -7,6 +7,7 @@ import { ModelProvider } from "@/providers/model-provider";
 import { ToasterProvider } from "@/providers/toast-provider";
 
 import "./globals.css";
+import { ThemeProvider } from "@/providers/theme-provide";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,9 +38,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       >
         <body className={inter.className}>
-          <ToasterProvider />
-          <ModelProvider />
-          {children}
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <ToasterProvider />
+            <ModelProvider />
+            {children}
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>
