@@ -26,8 +26,11 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
     }, []);
 
     const onUpload = (result: any) => {
-        onChange(result.info.secure_url);
-    }
+        console.log("Upload result:", JSON.stringify(result, null, 2));
+        if (result?.info?.secure_url) {
+            onChange(result.info.secure_url);
+        }
+    };
     
     if (!isMounted) {
         return null;
@@ -45,13 +48,20 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
                         </div>
                         <Image 
                             fill
+                            sizes="200px"
                             className="object-cover"
                             alt="Image"
                             src={url}/>
                     </div>
                 ))}
             </div>
-            <CldUploadWidget onSuccess={onUpload} uploadPreset="novbyorf">
+            <CldUploadWidget 
+                onSuccess={onUpload} 
+                uploadPreset="novbyorf"
+                options={{ 
+                    multiple: true // ← ДОБАВИТЬ ЭТО
+                }}
+                >
                 {({ open }) => {
                     const onClick = () => {
                         open();

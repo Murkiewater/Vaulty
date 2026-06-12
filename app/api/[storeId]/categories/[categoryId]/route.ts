@@ -11,7 +11,7 @@ export async function GET (
         const { categoryId } = await params;
         
         if (!categoryId) {
-            return new NextResponse("Billboard id is required", { status: 400 });
+            return new NextResponse("Category id is required", { status: 400 });
         }
 
         const category = await prismadb.category.findUnique({
@@ -68,13 +68,16 @@ export async function PATCH (
             return new NextResponse("Unauthorized", { status: 403 });
         }
 
-        const category = await prismadb.category.updateMany({
+        const category = await prismadb.category.update({
             where: {
-                id: billboardId,
+                id: categoryId,
             },
             data: {
                 name,
                 billboardId
+            },
+            include: {
+                billboard: true
             }
         });
 
@@ -112,7 +115,7 @@ export async function DELETE (
             return new NextResponse("Unauthorized", { status: 403 });
         }
 
-        const category = await prismadb.category.deleteMany({
+        const category = await prismadb.category.delete({
             where: {
                 id: categoryId,
             }
